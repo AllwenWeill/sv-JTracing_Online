@@ -1,5 +1,5 @@
 # WebServer
-用C++实现的高性能WEB服务器，经过webbenchh压力测试可以实现上万的QPS
+用C++实现的高性能WEB服务器，经过webbenchh压力测试可以实现近万的QPS
 
 ## 功能
 * 利用IO复用技术Epoll与线程池实现多线程的Reactor高并发模型；
@@ -53,6 +53,7 @@ make
 ```
 
 ## Webbench测试结果
+```bash
 Webbench - Simple Web Benchmark 1.5
 Copyright (c) Radim Kolar 1997-2004, GPL Open Source Software.
 
@@ -61,7 +62,7 @@ Benchmarking: GET http://192.168.48.128:1316/
 
 Speed=132156 pages/min, 6923630 bytes/sec.
 Requests: 11013 susceed, 0 failed.
-
+```
 
 
 ## 致谢
