@@ -17,7 +17,7 @@
 class WebServer {
 public:
     WebServer(
-        int port, int connPoolNum = 12, int threadNum = 14);
+        int port, int threadNum = 14);
     ~WebServer();
     void Start();
 private:
@@ -32,8 +32,8 @@ private:
     void OnRead_(HttpConn* client);
     void OnWrite_(HttpConn* client);
     void OnProcess(HttpConn* client);
-    static const int MAX_FD = 65536;
     static int SetFdNonblock(int fd);   //设置文件描述符非阻塞
+    static const int MAX_FD = 65536;
     int port_;
     bool isClose_;
     int listenFd_;

@@ -2,7 +2,7 @@
 
 using namespace std;
 
-WebServer::WebServer(int port, int connPoolNum, int threadNum)
+WebServer::WebServer(int port, int threadNum)
     :port_(port), isClose_(false),
     threadpool_(new ThreadPool(threadNum)), epoller_(new Epoller())
     {
