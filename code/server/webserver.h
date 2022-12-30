@@ -36,10 +36,10 @@ private:
     static const int MAX_FD = 65536;
     int port_;
     bool isClose_;
-    int listenFd_;
+    int listenFd_;  //负责监听的描述符
     char* srcDir_; 
-    uint32_t listenEvent_;
-    uint32_t connEvent_;
+    uint32_t listenEvent_;  //监听的文件描述符事件
+    uint32_t connEvent_;    //连接的文件描述符事件
     std::shared_ptr<ThreadPool> threadpool_;
     std::shared_ptr<Epoller> epoller_;
     std::unordered_map<int, HttpConn> httpConn_umap; //客户端连接的信息

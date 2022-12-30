@@ -13,23 +13,12 @@
 class HttpRequest {
 public:
     enum PARSE_STATE {
-        REQUEST_LINE,
-        HEADERS,
-        BODY,
-        FINISH,        
+        REQUEST_LINE,   //正在解析首行
+        HEADERS,    //请求头
+        BODY,   //请求体
+        FINISH, //解析完成  
     };
 
-    enum HTTP_CODE {
-        NO_REQUEST = 0,
-        GET_REQUEST,
-        BAD_REQUEST,
-        NO_RESOURSE,
-        FORBIDDENT_REQUEST,
-        FILE_REQUEST,
-        INTERNAL_ERROR,
-        CLOSED_CONNECTION,
-    };
-    
     HttpRequest() { Init(); }
     ~HttpRequest() = default;
     void Init();
@@ -46,18 +35,17 @@ private:
     bool ParseRequestLine_(const std::string& line);
     void ParseHeader_(const std::string& line);
     void ParseBody_(const std::string& line);
-
     void ParsePath_();
     void ParsePost_();
     void ParseFromUrlencoded_();
-    PARSE_STATE state_;
-    std::string method_, path_, version_, body_;
-    std::unordered_map<std::string, std::string> header_;
-    std::unordered_map<std::string, std::string> post_;
+    PARSE_STATE state_; //解析状态
+    std::string method_, path_, version_, body_;    //解析方法，请求路径，协议版本，请求体
+    std::unordered_map<std::string, std::string> header_;   //请求头
+    std::unordered_map<std::string, std::string> post_; //post请求表单数据
 
-    static const std::unordered_set<std::string> DEFAULT_HTML;
+    static const std::unordered_set<std::string> DEFAULT_HTML;  //默认网页
     static const std::unordered_map<std::string, int> DEFAULT_HTML_TAG;
-    static int ConverHex(char ch);
+    static int ConverHex(char ch);  //转换16进制
 };
 
 
