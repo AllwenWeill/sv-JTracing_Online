@@ -124,7 +124,7 @@ void HttpResponse::AddContent_(Buffer& buff) {
 
     /* 将文件映射到内存提高文件的访问速度 
         MAP_PRIVATE 建立一个写入时拷贝的私有映射*/
-    int* mmRet = (int*)mmap(0, mmFileStat_.st_size, PROT_READ, MAP_PRIVATE, srcFd, 0);
+    int* mmRet = (int*)mmap(0, mmFileStat_.st_size, PROT_READ, MAP_PRIVATE, srcFd, 0);  //mmap()系统调用使得进程之间通过映射同一个普通文件实现共享内存。普通文件被映射到进程地址空间后，进程可以像访问普通内存一样对文件进行访问，不必再调用read()，write（）等操作。
     if(*mmRet == -1) {
         ErrorContent(buff, "File NotFound!");
         return; 

@@ -64,7 +64,7 @@ ssize_t HttpConn::read(int* saveErrno) {
 ssize_t HttpConn::write(int* saveErrno) {
     ssize_t len = -1;
     do {
-        len = writev(fd_, iov_, iovCnt_);
+        len = writev(fd_, iov_, iovCnt_);   //分散写，将不同内存的内容一起写，iov_封装这两块不同的内存
         if(len <= 0) {
             *saveErrno = errno;
             break;

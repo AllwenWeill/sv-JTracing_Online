@@ -27,10 +27,10 @@ bool HttpRequest::parse(Buffer& buff) {
     if(buff.ReadableBytes() <= 0) {
         return false;
     }
-    while(buff.ReadableBytes() && state_ != FINISH) {
+    while(buff.ReadableBytes() && state_ != FINISH) {   
         const char* lineEnd = search(buff.Peek(), buff.BeginWriteConst(), CRLF, CRLF + 2);
         std::string line(buff.Peek(), lineEnd);
-        switch(state_)
+        switch(state_)  //此处各种错误/异常状态没有判断，鲁棒性不强，后期可以继续完善
         {
         case REQUEST_LINE:
             if(!ParseRequestLine_(line)) {

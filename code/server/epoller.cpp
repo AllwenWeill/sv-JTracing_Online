@@ -1,12 +1,9 @@
-/*
- * @Author       : mark
- * @Date         : 2020-06-19
- * @copyleft Apache 2.0
- */
-
 #include "epoller.h"
 
-Epoller::Epoller(int maxEvent):epollFd_(epoll_create(512)), events_(maxEvent){
+Epoller::Epoller(int maxEvent)
+    :epollFd_(epoll_create(512)), //epoll_create()内要传的参数为表示所要监视文件描述符的最大值，不过在后来的Linux版本中已经被弃用（同时，size不要传0，会报invalid argument错误
+    events_(maxEvent)
+{
     assert(epollFd_ >= 0 && events_.size() > 0);
 }
 

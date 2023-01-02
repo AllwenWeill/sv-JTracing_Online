@@ -3,8 +3,10 @@
 using namespace std;
 
 WebServer::WebServer(int port, int threadNum)
-    :port_(port), isClose_(false),
-    threadpool_(new ThreadPool(threadNum)), epoller_(new Epoller())
+    :port_(port), 
+    isClose_(false),
+    threadpool_(new ThreadPool(threadNum)), 
+    epoller_(new Epoller())
     {
     srcDir_ = getcwd(nullptr, 256);
     assert(srcDir_);

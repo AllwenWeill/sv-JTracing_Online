@@ -1,8 +1,3 @@
-/*
- * @Author       : mark
- * @Date         : 2020-06-15
- * @copyleft Apache 2.0
- */ 
 #ifndef EPOLLER_H
 #define EPOLLER_H
 
@@ -15,7 +10,7 @@
 
 class Epoller {
 public:
-    explicit Epoller(int maxEvent = 10240);
+    explicit Epoller(int maxEvent = 102400);
     ~Epoller();
     bool AddFd(int fd, uint32_t events);
     bool ModFd(int fd, uint32_t events);
