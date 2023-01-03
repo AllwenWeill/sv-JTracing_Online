@@ -10,7 +10,7 @@
 
 class Epoller {
 public:
-    explicit Epoller(int maxEvent = 102400);
+    explicit Epoller(int maxEvent = 1024);
     ~Epoller();
     bool AddFd(int fd, uint32_t events);
     bool ModFd(int fd, uint32_t events);
