@@ -6,7 +6,6 @@
 #include <string>
 #include <regex>
 #include <errno.h>     
-#include <mysql/mysql.h>  //mysql
 
 #include "../buffer/buffer.h"
 
