@@ -134,9 +134,13 @@ void HttpResponse::AddContent_(Buffer& buff) {
     buff.Append("Content-length: " + to_string(mmFileStat_.st_size) + "\r\n\r\n");
 }
 
+void HttpResponse::AddContent_(Buffer& buff, std::string& text){
+    buff.Append("Content-length: " + to_string(text.size()) + "\r\n\r\n");
+}
+
 void HttpResponse::UnmapFile() {
     if(mmFile_) {
-        munmap(mmFile_, mmFileStat_.st_size);
+        munmap(mmFile_, mmFileStat_.st_size); //解除内存映射
         mmFile_ = nullptr;
     }
 }
