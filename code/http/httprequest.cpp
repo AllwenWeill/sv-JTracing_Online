@@ -63,9 +63,6 @@ void HttpRequest::ParsePath_() {
     else {
         for(auto &item: DEFAULT_HTML) { //通过根据当前post请求中用户需要的html页面，返将对应的html地址加入path路径中作为response发送给用户。
             if(item == path_) {
-                if(item == "/compileButton"){ //如果点击编译按钮，则获取输入框中sv代码，然后进行编译，但如何将结果呈现在该html页面上？
-
-                }
                 path_ += ".html";
                 break;
             }
@@ -114,11 +111,18 @@ void HttpRequest::ParsePost_() {
         ParseFromUrlencoded_();
         if(DEFAULT_HTML_TAG.count(path_)) {
             int tag = DEFAULT_HTML_TAG.find(path_)->second;
-            if(tag == 0 || tag == 1) {
-                path_ = "/welcome.html";
+            if(tag == 0 || tag == 1) { //如果是注册或者登录页面
+                if(post_["username"] == "123")
+                    path_ = "/welcome.html";
+                else
+                    path_ = "/error.html";
             }
         }
     }   
+}
+
+bool HttpRequest::svParser(const std::string& code){
+    
 }
 
 void HttpRequest::ParseFromUrlencoded_() {

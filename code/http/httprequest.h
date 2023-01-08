@@ -37,6 +37,7 @@ private:
     void ParsePath_();
     void ParsePost_();
     void ParseFromUrlencoded_();
+    bool svParser(const std::string& code); //解析SystemVerilog源代码
     PARSE_STATE state_; //解析状态
     std::string method_, path_, version_, body_;    //解析方法，请求路径，协议版本，请求体
     std::unordered_map<std::string, std::string> header_;   //请求头
