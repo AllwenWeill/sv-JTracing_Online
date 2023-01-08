@@ -39,6 +39,7 @@ private:
     bool isClose_;
     int iovCnt_;
     struct iovec iov_[2];//iov_base指向一个缓冲区，这个缓冲区是存放readv所接收的数据或是writev将要发送的数据,iov_len确定了接收的最大长度以及实际写入的长度
+    //iov_[2]内装了两块内存，一块writeBuff，应一块是mmFile_要发送的资源所在的内存
     Buffer readBuff_; // 读缓冲区
     Buffer writeBuff_; // 写缓冲区
     HttpRequest request_;

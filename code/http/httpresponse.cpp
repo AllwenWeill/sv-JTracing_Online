@@ -129,7 +129,7 @@ void HttpResponse::AddContent_(Buffer& buff) {
         ErrorContent(buff, "File NotFound!");
         return; 
     }
-    mmFile_ = (char*)mmRet;
+    mmFile_ = (char*)mmRet; //mmFile_为要发送资源的地址，从该地址作为起始地址的内存发送给浏览器端
     close(srcFd);
     buff.Append("Content-length: " + to_string(mmFileStat_.st_size) + "\r\n\r\n");
 }
