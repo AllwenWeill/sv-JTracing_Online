@@ -61,7 +61,7 @@ void HttpRequest::ParsePath_() {
         path_ = "/index.html"; 
     }
     else {
-        for(auto &item: DEFAULT_HTML) {
+        for(auto &item: DEFAULT_HTML) { //通过根据当前post请求中用户需要的html页面，返将对应的html地址加入path路径中作为response发送给用户。
             if(item == path_) {
                 path_ += ".html";
                 break;
@@ -101,47 +101,63 @@ void HttpRequest::ParseBody_(const string& line) {
 }
 
 int HttpRequest::ConverHex(char ch) {
-    if(ch >= 'A' && ch <= 'F') return ch -'A' + 10;
-    if(ch >= 'a' && ch <= 'f') return ch -'a' + 10;
-    return ch;
+    if (ch >= 'A' && ch <= 'F') return ch - 'A' + 10;
+    if (ch >= 'a' && ch <= 'f') return ch - 'a' + 10;
+    if (ch >= '0' && ch <= '9')  return ch - '0';
 }
 
 void HttpRequest::ParsePost_() {
     if(method_ == "POST" && header_["Content-Type"] == "application/x-www-form-urlencoded") {
-        ParseFromUrlencoded_();
+        std::string codeText = ParseFromUrlencoded_();
         if(DEFAULT_HTML_TAG.count(path_)) {
             int tag = DEFAULT_HTML_TAG.find(path_)->second;
-            if(tag == 0 || tag == 1) {
-                path_ = "/welcome.html";
+            if(tag == 0 || tag == 1) { //如果是注册或者登录页面
+                if(svParser(codeText))
+                    path_ = "/welcome.html";
+                else
+                    path_ = "/error.html";
             }
         }
     }   
 }
 
-void HttpRequest::ParseFromUrlencoded_() {
-    if(body_.size() == 0) { return; }
+bool HttpRequest::svParser(const std::string& codeText){
+    SourceManager SM(codeText);
+    string *psm = &SM.fd.filememo;
+    cout<<*psm<<endl;
+    cout<<"------------"<<endl;
+    cout << "SM.fd.filesize:" << SM.fd.filememo.size() << endl;
+    // Lexer lex(psm, SM.fd.filesize);
+    // cout<<endl;
+    // Parser par(lex.getTokenVector());
+    return true;
+}
 
-    string key, value;
+string HttpRequest::ParseFromUrlencoded_() {
+    if(body_.size() == 0) { return nullptr; }
+    cout<<body_<<endl;
+    std::string key, value;
     int num = 0;
     int n = body_.size();
     int i = 0, j = 0;
-
+    std::string codeText;
     for(; i < n; i++) {
         char ch = body_[i];
         switch (ch) {
         case '=':
             key = body_.substr(j, i - j);
             j = i + 1;
-            break;
         case '+':
-            body_[i] = ' ';
-            break;
-        case '%':
-            num = ConverHex(body_[i + 1]) * 16 + ConverHex(body_[i + 2]);
-            body_[i + 2] = num % 10 + '0';
-            body_[i + 1] = num / 10 + '0';
+            codeText.push_back(' ');
+            continue;
+        case '%': {//此处应该有bug
+            int OCTnum = ConverHex(body_[i + 1]) * 16 + ConverHex(body_[i + 2]);
+            cout << OCTnum << endl;
+            char tmpCh = (char)OCTnum;
+            codeText.push_back(tmpCh);
             i += 2;
-            break;
+            continue;
+        }
         case '&':
             value = body_.substr(j, i - j);
             j = i + 1;
@@ -150,12 +166,15 @@ void HttpRequest::ParseFromUrlencoded_() {
         default:
             break;
         }
+        codeText.push_back(body_[i]);
     }
+    cout<<codeText<<endl;
     assert(j <= i);
     if(post_.count(key) == 0 && j < i) {
         value = body_.substr(j, i - j);
         post_[key] = value;
     }
+    return codeText.substr(9, codeText.size());
 }
 
 std::string HttpRequest::path() const{

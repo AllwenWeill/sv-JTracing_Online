@@ -6,8 +6,9 @@
 #include <string>
 #include <regex>
 #include <errno.h>     
-#include <mysql/mysql.h>  //mysql
-
+#include "Lexer.h"
+#include "LogError.h"
+#include "Parser.h"
 #include "../buffer/buffer.h"
 
 class HttpRequest {
@@ -37,7 +38,8 @@ private:
     void ParseBody_(const std::string& line);
     void ParsePath_();
     void ParsePost_();
-    void ParseFromUrlencoded_();
+    std::string ParseFromUrlencoded_();
+    bool svParser(const std::string& codeText); //解析SystemVerilog源代码
     PARSE_STATE state_; //解析状态
     std::string method_, path_, version_, body_;    //解析方法，请求路径，协议版本，请求体
     std::unordered_map<std::string, std::string> header_;   //请求头

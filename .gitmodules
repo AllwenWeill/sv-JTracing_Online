@@ -1,0 +1,3 @@
+[submodule "sv-JTracing"]
+	path = sv-JTracing
+	url = https://github.com/AllwenWeill/sv-JTracing.git
