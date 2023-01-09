@@ -127,9 +127,9 @@ bool HttpRequest::svParser(const std::string& codeText){
     cout<<*psm<<endl;
     cout<<"------------"<<endl;
     cout << "SM.fd.filesize:" << SM.fd.filememo.size() << endl;
-    // Lexer lex(psm, SM.fd.filesize);
-    // cout<<endl;
-    // Parser par(lex.getTokenVector());
+    Lexer lex(psm, SM.fd.filesize);
+    cout<<endl;
+    Parser par(lex.getTokenVector());
     return true;
 }
 
