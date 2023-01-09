@@ -101,9 +101,9 @@ void HttpRequest::ParseBody_(const string& line) {
 }
 
 int HttpRequest::ConverHex(char ch) {
-    if(ch >= 'A' && ch <= 'F') return ch -'A' + 10;
-    if(ch >= 'a' && ch <= 'f') return ch -'a' + 10;
-    return ch;
+    if (ch >= 'A' && ch <= 'F') return ch - 'A' + 10;
+    if (ch >= 'a' && ch <= 'f') return ch - 'a' + 10;
+    if (ch >= '0' && ch <= '9')  return ch - '0';
 }
 
 void HttpRequest::ParsePost_() {
@@ -124,7 +124,7 @@ void HttpRequest::ParsePost_() {
 bool HttpRequest::svParser(const std::string& codeText){
     SourceManager SM(codeText);
     string *psm = &SM.fd.filememo;
-    cout<<*psm<<endl;
+    //cout<<*psm<<endl;
     cout<<"------------"<<endl;
     cout << "SM.fd.filesize:" << SM.fd.filememo.size() << endl;
     // Lexer lex(psm, SM.fd.filesize);
@@ -143,122 +143,21 @@ void HttpRequest::ParseFromUrlencoded_() {
     std::string codeText;
     for(; i < n; i++) {
         char ch = body_[i];
-        //cout<<body_[i];
-        // if(body_[i] == '%'){
-        //     if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == '6'){
-        //         codeText.append("&");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == '0'){
-        //         codeText.append(" ");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == '1'){
-        //         codeText.append("!");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == '2'){
-        //         codeText.append("\"");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == '3'){
-        //         codeText.append("#");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == '4'){
-        //         codeText.append("$");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == '5'){
-        //         codeText.append("%");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == '7'){
-        //         codeText.append("'");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == '8'){
-        //         codeText.append("(");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == '9'){
-        //         codeText.append(")");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == 'A'){
-        //         codeText.append("*");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == 'B'){
-        //         codeText.append("+");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == 'C'){
-        //         codeText.append(",");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == 'F'){
-        //         codeText.append("/");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '3' && body_[i+2] == 'A'){
-        //         codeText.append(":");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '3' && body_[i+2] == 'B'){
-        //         codeText.append(";");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '3' && body_[i+2] == 'D'){
-        //         codeText.append("=");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '3' && body_[i+2] == 'E'){
-        //         codeText.append(">");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '3' && body_[i+2] == 'F'){
-        //         codeText.append("?");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '4' && body_[i+2] == '0'){
-        //         codeText.append("@");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '5' && body_[i+2] == 'B'){
-        //         codeText.append("[");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '5' && body_[i+2] == 'C'){
-        //         codeText.append("\\");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '5' && body_[i+2] == 'D'){
-        //         codeText.append("]");
-        //         i += 2;
-        //     }
-        //     else if(i < n - 2 && body_[i+1] == '7' && body_[i+2] == 'C'){
-        //         codeText.append("|");
-        //         i += 2;
-        //     }
-        //     else
-        //         break;
-        // }
-        // codeText.push_back(body_[i]);
         switch (ch) {
         case '=':
             key = body_.substr(j, i - j);
             j = i + 1;
-            break;
         case '+':
-            body_[i] = ' ';
-            break;
-        case '%': //此处应该有bug
-            num = ConverHex(body_[i + 1]) * 16 + ConverHex(body_[i + 2]);
-            body_[i + 2] = num % 10 + '0';
-            body_[i + 1] = num / 10 + '0';
+            codeText.push_back(' ');
+            continue;
+        case '%': {//此处应该有bug
+            int OCTnum = ConverHex(body_[i + 1]) * 16 + ConverHex(body_[i + 2]);
+            cout << OCTnum << endl;
+            char tmpCh = (char)OCTnum;
+            codeText.push_back(tmpCh);
             i += 2;
-            break;
+            continue;
+        }
         case '&':
             value = body_.substr(j, i - j);
             j = i + 1;
@@ -267,6 +166,7 @@ void HttpRequest::ParseFromUrlencoded_() {
         default:
             break;
         }
+        codeText.push_back(body_[i]);
     }
     cout<<codeText<<endl;
     assert(j <= i);
