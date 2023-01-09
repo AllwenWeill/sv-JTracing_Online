@@ -112,7 +112,7 @@ void HttpRequest::ParsePost_() {
         if(DEFAULT_HTML_TAG.count(path_)) {
             int tag = DEFAULT_HTML_TAG.find(path_)->second;
             if(tag == 0 || tag == 1) { //如果是注册或者登录页面
-                if(post_["username"] == "123")
+                if(svParser(post_["username"]))
                     path_ = "/welcome.html";
                 else
                     path_ = "/error.html";
@@ -121,20 +121,130 @@ void HttpRequest::ParsePost_() {
     }   
 }
 
-bool HttpRequest::svParser(const std::string& code){
-    
+bool HttpRequest::svParser(const std::string& codeText){
+    SourceManager SM(codeText);
+    string *psm = &SM.fd.filememo;
+    cout<<*psm<<endl;
+    cout<<"------------"<<endl;
+    cout << "SM.fd.filesize:" << SM.fd.filememo.size() << endl;
+    // Lexer lex(psm, SM.fd.filesize);
+    // cout<<endl;
+    // Parser par(lex.getTokenVector());
+    return true;
 }
 
 void HttpRequest::ParseFromUrlencoded_() {
     if(body_.size() == 0) { return; }
-
-    string key, value;
+    cout<<body_<<endl;
+    std::string key, value;
     int num = 0;
     int n = body_.size();
     int i = 0, j = 0;
-
+    std::string codeText;
     for(; i < n; i++) {
         char ch = body_[i];
+        //cout<<body_[i];
+        // if(body_[i] == '%'){
+        //     if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == '6'){
+        //         codeText.append("&");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == '0'){
+        //         codeText.append(" ");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == '1'){
+        //         codeText.append("!");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == '2'){
+        //         codeText.append("\"");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == '3'){
+        //         codeText.append("#");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == '4'){
+        //         codeText.append("$");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == '5'){
+        //         codeText.append("%");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == '7'){
+        //         codeText.append("'");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == '8'){
+        //         codeText.append("(");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == '9'){
+        //         codeText.append(")");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == 'A'){
+        //         codeText.append("*");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == 'B'){
+        //         codeText.append("+");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == 'C'){
+        //         codeText.append(",");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '2' && body_[i+2] == 'F'){
+        //         codeText.append("/");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '3' && body_[i+2] == 'A'){
+        //         codeText.append(":");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '3' && body_[i+2] == 'B'){
+        //         codeText.append(";");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '3' && body_[i+2] == 'D'){
+        //         codeText.append("=");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '3' && body_[i+2] == 'E'){
+        //         codeText.append(">");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '3' && body_[i+2] == 'F'){
+        //         codeText.append("?");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '4' && body_[i+2] == '0'){
+        //         codeText.append("@");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '5' && body_[i+2] == 'B'){
+        //         codeText.append("[");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '5' && body_[i+2] == 'C'){
+        //         codeText.append("\\");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '5' && body_[i+2] == 'D'){
+        //         codeText.append("]");
+        //         i += 2;
+        //     }
+        //     else if(i < n - 2 && body_[i+1] == '7' && body_[i+2] == 'C'){
+        //         codeText.append("|");
+        //         i += 2;
+        //     }
+        //     else
+        //         break;
+        // }
+        // codeText.push_back(body_[i]);
         switch (ch) {
         case '=':
             key = body_.substr(j, i - j);
@@ -143,7 +253,7 @@ void HttpRequest::ParseFromUrlencoded_() {
         case '+':
             body_[i] = ' ';
             break;
-        case '%':
+        case '%': //此处应该有bug
             num = ConverHex(body_[i + 1]) * 16 + ConverHex(body_[i + 2]);
             body_[i + 2] = num % 10 + '0';
             body_[i + 1] = num / 10 + '0';
@@ -158,6 +268,7 @@ void HttpRequest::ParseFromUrlencoded_() {
             break;
         }
     }
+    cout<<codeText<<endl;
     assert(j <= i);
     if(post_.count(key) == 0 && j < i) {
         value = body_.substr(j, i - j);
