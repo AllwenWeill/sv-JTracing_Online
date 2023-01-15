@@ -31,8 +31,10 @@ public:
     std::string GetPost(const std::string& key) const;
     std::string GetPost(const char* key) const;
     bool IsKeepAlive() const;
+    bool getIsFindCompileButton();
 
 private:
+    bool isFindCompileButton;
     bool ParseRequestLine_(const std::string& line);
     void ParseHeader_(const std::string& line);
     void ParseBody_(const std::string& line);

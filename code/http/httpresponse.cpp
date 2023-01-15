@@ -49,7 +49,7 @@ HttpResponse::~HttpResponse() {
     UnmapFile();
 }
 
-void HttpResponse::Init(const string& srcDir, string& path, bool isKeepAlive, int code){
+void HttpResponse::Init(const string& srcDir, string& path, bool isKeepAlive, int code, bool isFindCompileButton){
     assert(srcDir != "");
     if(mmFile_) { UnmapFile(); }
     code_ = code;
@@ -58,6 +58,7 @@ void HttpResponse::Init(const string& srcDir, string& path, bool isKeepAlive, in
     srcDir_ = srcDir;
     mmFile_ = nullptr; 
     mmFileStat_ = { 0 };
+    isFindCompileButton_ = isFindCompileButton;
 }
 
 void HttpResponse::MakeResponse(Buffer& buff) {
@@ -132,6 +133,9 @@ void HttpResponse::AddContent_(Buffer& buff) {
     mmFile_ = (char*)mmRet; //mmFile_为要发送资源的地址，从该地址作为起始地址的内存发送给浏览器端
     close(srcFd);
     buff.Append("Content-length: " + to_string(mmFileStat_.st_size) + "\r\n\r\n");
+    if(isFindCompileButton_){
+        buff.Append("hello world.");
+    }
 }
 
 void HttpResponse::AddContent_(Buffer& buff, std::string& text){
@@ -148,7 +152,9 @@ void HttpResponse::UnmapFile() {
 string HttpResponse::GetFileType_() {
     /* 判断文件类型 */
     string::size_type idx = path_.find_last_of('.');
-    if(idx == string::npos) {
+    cout<<path_<<endl;
+    if(idx == string::npos || isFindCompileButton_) {
+        cout<<"<find button!>"<<endl;
         return "text/plain";
     }
     string suffix = path_.substr(idx);

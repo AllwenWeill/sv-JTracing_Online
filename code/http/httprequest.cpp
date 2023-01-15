@@ -13,6 +13,7 @@ void HttpRequest::Init() {
     state_ = REQUEST_LINE;
     header_.clear();
     post_.clear();
+    isFindCompileButton = false;
 }
 
 bool HttpRequest::IsKeepAlive() const {
@@ -112,10 +113,14 @@ void HttpRequest::ParsePost_() {
         if(DEFAULT_HTML_TAG.count(path_)) {
             int tag = DEFAULT_HTML_TAG.find(path_)->second;
             if(tag == 0 || tag == 1) { //如果是注册或者登录页面
-                if(svParser(codeText))
-                    path_ = "/welcome.html";
-                else
-                    path_ = "/error.html";
+                if(post_.count("inputText")){
+                    isFindCompileButton = true;
+                    //svParser(codeText);
+                }
+            //     if(svParser(codeText))
+            //         path_ = "/welcome.html"; //content-type:text/html
+            //     else
+            //         path_ = "/error.html";
             }
         }
     }   
@@ -206,4 +211,8 @@ std::string HttpRequest::GetPost(const char* key) const {
         return post_.find(key)->second;
     }
     return "";
+}
+
+bool HttpRequest::getIsFindCompileButton(){
+    return isFindCompileButton;
 }

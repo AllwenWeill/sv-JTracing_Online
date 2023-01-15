@@ -93,11 +93,11 @@ bool HttpConn::process() {
         return false;
     }
     else if(request_.parse(readBuff_)) {
-        response_.Init(srcDir, request_.path(), request_.IsKeepAlive(), 200);
+        response_.Init(srcDir, request_.path(), request_.IsKeepAlive(), 200, request_.getIsFindCompileButton());
     } else {
         response_.Init(srcDir, request_.path(), false, 400);
     }
-
+    
     response_.MakeResponse(writeBuff_);
     /* 响应头 */
     iov_[0].iov_base = const_cast<char*>(writeBuff_.Peek());

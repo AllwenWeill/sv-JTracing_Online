@@ -52,7 +52,7 @@
           </div>
      </div>
      <!-- HOME SECTION -->
-    
+
      <section id="home">
           <div class="container">
                <div class="row">
@@ -71,24 +71,24 @@
      </section>
      <div class="container">
           <div class="row">
-          <div align="center" width="906" height="506">
-                    <img src="images/instagram-image1.jpg"  />
+               <div align="center" width="906" height="506">
+                    <img src="images/instagram-image1.jpg" />
                </div>
                <div align="center" width="906" height="506">
-                    <img src="images/instagram-image2.jpg"  />
+                    <img src="images/instagram-image2.jpg" />
                </div>
                <div align="center" width="906" height="506">
-                    <img src="images/instagram-image3.jpg"  />
+                    <img src="images/instagram-image3.jpg" />
                </div>
                <div align="center" width="906" height="506">
-                    <img src="images/instagram-image4.jpg"  />
+                    <img src="images/instagram-image4.jpg" />
                </div>
                <div align="center" width="906" height="506">
-                    <img src="images/instagram-image5.jpg"  />
+                    <img src="images/instagram-image5.jpg" />
                </div>
           </div>
      </div>
-  
+
      <!-- SCRIPTS -->
      <script src="js/jquery.js"></script>
      <script src="js/bootstrap.min.js"></script>
@@ -101,12 +101,12 @@
      <script>
           let input = document.querySelector("#home > div > div > div.col-md-8.col-sm-8 > h1")
           let output = document.querySelector("#home > div > div > div.col-md-8.col-sm-8 > h1")
-          //$.post()
-          // asdfadf.post("/asdfasdf", {
-          //      data: input.innerText
-          // }, (res)=>{
-          //      output.innerText = res;
-          // })
+
+          $(input).post({ data: input.innerText }, function (data) {
+               console.dir(data)
+               console.dir(this.responseText)
+               
+          });
      </script>
 </body>
 
