@@ -1,5 +1,10 @@
 content:-----------<ParserInformation>---------
-->parsing a IntVariable...->parsing a Binary Expression...-----------<ErrorInformation>---------
+->parsing a IntVariable...->parsing a Binary Expression...->parsing a IntVariable...->parsing a Binary Expression...->parsing a Begin...->parsing a Binary Expression...->parsing a Binary Expression...-----------<ErrorInformation>---------
+Line number: 2-> Error: expected ')'. 
+Line number: 2-> Error: expcted ';'. 
+Line number: 2-> Error: expcted ';'. 
+Line number: 2-> Error: expcted ';'. 
 -----------<VariableInformation>---------
+i->IntKeyword
 a->IntKeyword
 

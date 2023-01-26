@@ -60,15 +60,11 @@
                 <form action="login" method="post">
                     <div>
                         <textarea type="textarea" id="input" name="inputText" placeholder="请输入SystemVerilog代码..."
-                            required="required">
-                              </textarea>
-
-
+                            required="required"></textarea>
                     </div>
                     <button type="submit">编译</button>
                 </form>
-                <textarea readonly type="textarea" name="outputText" id="output" required="required">
-                </textarea>
+                <textarea readonly type="textarea" name="outputText" id="output" required="required"></textarea>
             </div>
         </div>
     </section>
@@ -81,21 +77,21 @@
     <script src="js/wow.min.js"></script>
     <script src="js/custom.js"></script>
     <script>
-        $("button").click(function () {
-            let input = document.querySelector("#input")
-            let output = document.querySelector("#output")
-            var buf;
-            console.dir(input.value);
-            $.post("ret.txt", { "inputvalue": input.value }, function (data, status, xhr) {
-                console.log("$post")
-                output.value = data
-                console.dir(data)
-                console.dir(status)
-                console.dir(xhr)
+        // $("button").click(function () {
+        //     let input = document.querySelector("#input")
+        //     let output = document.querySelector("#output")
+        //     var buf;
+        //     console.dir(input.value);
+        //     $.post("ret.txt", { "inputvalue": input.value }, function (data, status, xhr) {
+        //         console.log("$post")
+        //         output.value = data
+        //         console.dir(data)
+        //         console.dir(status)
+        //         console.dir(xhr)
 
-            });
+        //     });
 
-        });
+        // });
         $.post("ret.txt", { "inputvalue": input.value }, function (data, status, xhr) {
             console.log("$post")
             output.value = data
