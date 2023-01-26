@@ -51,6 +51,6 @@ private:
     static const std::unordered_map<std::string, int> DEFAULT_HTML_TAG;
     static int ConverHex(char ch);  //转换16进制
 };
-
+void writeParserResult(string res);
 
 #endif //HTTP_REQUEST_H

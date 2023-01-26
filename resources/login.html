@@ -56,17 +56,19 @@
      <section id="home">
           <div class="container">
                <div class="row">
-                    <div align="center">
-                         <h1 class="wow fadeInUp" data-wow-delay="0.6s">登录</h1>
-                         <form action="login" method="post">
-                              <div align="center">
-                                   <textarea type="textarea" name="inputText" placeholder="请输入SystemVerilog代码..."
-                                        required="required">
-                                   </textarea>
-                              </div><br />
-                              <div align="center"><button type="submit">编译</button></div>
-                         </form>
-                    </div>
+                    <h1 class="wow fadeInUp" data-wow-delay="0.6s">输入</h1>
+                    <form action="login" method="post">
+                         <div>
+                              <textarea class="wow fadeInUp" type="textarea" id="input" name="inputText" placeholder="请输入SystemVerilog代码..."
+                              required="required">
+                              </textarea>
+                              
+                         </div>
+                         <button class="wow fadeInUp" type="submit">编译</button>
+                    </form>
+                    <textarea readonly class="wow fadeInUp" type="textarea" name="outputText" id="output"
+                    required="required">
+                    </textarea>
                </div>
           </div>
      </section>
@@ -80,21 +82,19 @@
      <script src="js/custom.js"></script>
      <script>
           $("button").click(function () {
-               let input = document.querySelector("#home > div > div > div > form > div:nth-child(1) > textarea")
-               $.get("http://172.25.94.71:1316/login", function (data, status) {
-                    console.dir(this)
-                    console.dir(data)
-                    console.dir(status)
-                    console.dir(input)
-               });
-               $.post("http://172.25.94.71:1316/login", function (data, status, xhr) {
-                    console.dir(this)
-                    console.dir(data)
-                    console.dir(status)
-                    console.dir(xhr)
-                    console.dir(input)
+               let input = document.querySelector("#input")
+               let output = document.querySelector("#output")
+               var buf;
+               console.dir(input.value);
+               // $.post("ret.txt", {"inputvalue":input.value}, function (data,status,xhr) {
+               //      console.log("$post")
+               //      output.value=data
+               //      console.dir(data)
+               //      console.dir(status)
+               //      console.dir(xhr)
 
-               });
+               // });
+
           });
      </script>
 </body>

@@ -15,7 +15,6 @@ html, body {
 }
 
 
-
 /*---------------------------------------
   Typorgraphy              
 -----------------------------------------*/
@@ -561,4 +560,13 @@ a:hover, a:active, a:focus {
     height: 85px;
   }
 
+}
+
+textarea#input {
+  width: 40%;
+  height: 500px;
+}
+textarea#output {
+  width: 40%;
+  height: 500px;
 }

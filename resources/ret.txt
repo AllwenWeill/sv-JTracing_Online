@@ -1,0 +1,5 @@
+content:-----------<ParserInformation>---------
+->parsing a IntVariable...->parsing a Binary Expression...-----------<ErrorInformation>---------
+-----------<VariableInformation>---------
+a->IntKeyword
+

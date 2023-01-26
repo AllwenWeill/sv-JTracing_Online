@@ -88,6 +88,12 @@ ssize_t HttpConn::write(int* saveErrno) {
 }
 
 bool HttpConn::process() {
+    printf("in httpconn:process\n");
+    cout<<"--------------"<<endl;
+    for(auto i : readBuff_.buffer_){
+        cout<<i;
+    }
+    cout<<"--------------"<<endl;
     request_.Init();
     if(readBuff_.ReadableBytes() <= 0) {
         return false;

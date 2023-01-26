@@ -1,5 +1,6 @@
 #include "httprequest.h"
 using namespace std;
+namespace fs = std::filesystem;
 
 const unordered_set<string> HttpRequest::DEFAULT_HTML{
             "/index", "/register", "/login",
@@ -28,9 +29,13 @@ bool HttpRequest::parse(Buffer& buff) {
     if(buff.ReadableBytes() <= 0) {
         return false;
     }
+    // for(auto i : buff.buffer_){
+    //     cout<<i;
+    // }
     while(buff.ReadableBytes() && state_ != FINISH) {   
         const char* lineEnd = search(buff.Peek(), buff.BeginWriteConst(), CRLF, CRLF + 2);
         std::string line(buff.Peek(), lineEnd);
+        printf("L: %d, state %d\n",__LINE__,state_);
         switch(state_)  //此处各种错误/异常状态没有判断，鲁棒性不强，后期可以继续完善
         {
         case REQUEST_LINE:
@@ -111,16 +116,24 @@ void HttpRequest::ParsePost_() {
     if(method_ == "POST" && header_["Content-Type"] == "application/x-www-form-urlencoded") {
         std::string codeText = ParseFromUrlencoded_();
         if(DEFAULT_HTML_TAG.count(path_)) {
+            cout<<"path____"<<path_;
             int tag = DEFAULT_HTML_TAG.find(path_)->second;
             if(tag == 0 || tag == 1) { //如果是注册或者登录页面
-                if(post_.count("inputText")){
+                if(post_.count("sendbtn")){
+                    cout<<"post_.count(sendbtn)";
                     isFindCompileButton = true;
                     //svParser(codeText);
                 }
-            //     if(svParser(codeText))
-            //         path_ = "/welcome.html"; //content-type:text/html
-            //     else
-            //         path_ = "/error.html";
+                if(post_.count("inputText")){
+                    cout<<"post_.count(inputText)";
+                    isFindCompileButton = true;
+                    //svParser(codeText);
+                    if(svParser(codeText))
+                         path_ = "/compiled.html"; //content-type:text/html
+                    else
+                        path_ = "/error.html";
+                }
+                
             }
         }
     }   
@@ -129,18 +142,31 @@ void HttpRequest::ParsePost_() {
 bool HttpRequest::svParser(const std::string& codeText){
     SourceManager SM(codeText);
     string *psm = &SM.fd.filememo;
-    cout<<*psm<<endl;
+    cout<<"codeText:"<<codeText<<endl;
     cout<<"------------"<<endl;
     cout << "SM.fd.filesize:" << SM.fd.filememo.size() << endl;
     Lexer lex(psm, SM.fd.filesize);
     cout<<endl;
     Parser par(lex.getTokenVector());
+    string resParser = par.showParserInformation() + par.showErrorInformation() + par.showVariableInformation();
+    writeParserResult(resParser);
     return true;
+}
+
+void writeParserResult(string res){
+    fs::path filepath= "../resources/ret.txt";//resources/ret.txt code/http/httprequest.cpp
+    if (!fs::exists(filepath)) {
+        perror("Error: Invaild filepath.\n");
+        exit(-1); //�޸�Ϊ��������·��
+    }
+    ofstream output{ filepath };
+    output << "content:" << res << endl;
+    output.close();
 }
 
 string HttpRequest::ParseFromUrlencoded_() {
     if(body_.size() == 0) { return nullptr; }
-    cout<<body_<<endl;
+    // cout<<body_<<endl;
     std::string key, value;
     int num = 0;
     int n = body_.size();
