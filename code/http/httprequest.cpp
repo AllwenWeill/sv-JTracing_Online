@@ -3,11 +3,11 @@ using namespace std;
 namespace fs = std::filesystem;
 
 const unordered_set<string> HttpRequest::DEFAULT_HTML{
-            "/index", "/register", "/login",
+            "/index", "/helper", "/compile",
              "/welcome", "/video", "/picture", };
 
 const unordered_map<string, int> HttpRequest::DEFAULT_HTML_TAG {
-            {"/register.html", 0}, {"/login.html", 1},  };
+            {"/compile.html", 1},  };
 
 void HttpRequest::Init() {
     method_ = path_ = version_ = body_ = "";
@@ -114,11 +114,11 @@ int HttpRequest::ConverHex(char ch) {
 
 void HttpRequest::ParsePost_() {
     if(method_ == "POST" && header_["Content-Type"] == "application/x-www-form-urlencoded") {
-        std::string codeText = ParseFromUrlencoded_();
+        std::string codeText = ParseFromUrlencoded_() + "\n";
         if(DEFAULT_HTML_TAG.count(path_)) {
             cout<<"path____"<<path_;
             int tag = DEFAULT_HTML_TAG.find(path_)->second;
-            if(tag == 0 || tag == 1) { //如果是注册或者登录页面
+            if(tag == 1) { //如果是编译页面
                 if(post_.count("sendbtn")){
                     cout<<"post_.count(sendbtn)";
                     isFindCompileButton = true;
@@ -154,13 +154,13 @@ bool HttpRequest::svParser(const std::string& codeText){
 }
 
 void writeParserResult(string res){
-    fs::path filepath= "../resources/ret.txt";//resources/ret.txt code/http/httprequest.cpp
+    fs::path filepath= "/home/allwen77/Desktop/workstation/sv-WebServer/resources/ret.txt";//resources/ret.txt code/http/httprequest.cpp
     if (!fs::exists(filepath)) {
         perror("Error: Invaild filepath.\n");
-        exit(-1); //�޸�Ϊ��������·��
+        exit(-1); 
     }
     ofstream output{ filepath };
-    output << "content:" << res << endl;
+    output << res << endl;
     output.close();
 }
 
