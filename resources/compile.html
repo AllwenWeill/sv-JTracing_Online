@@ -55,13 +55,11 @@
      <!-- HOME SECTION -->
      <section id="home">
           <div class="container">
-               <div class="row">
+               <div class="col">
                     <h1 class="wow fadeInUp" data-wow-delay="0.6s">输入</h1>
                     <form action="compile" method="post">
-                         <div>
-                              <textarea class="wow fadeInUp" type="textarea" id="input" name="inputText" placeholder="请输入SystemVerilog代码..."
-                              required="required" wrap="soft"></textarea>
-                         </div>
+                         <textarea class="wow fadeInUp" type="textarea" id="input" name="inputText" placeholder="请输入SystemVerilog代码..."
+                         required="required" wrap="soft"></textarea>
                          <button class="wow fadeInUp" type="submit">编译</button>
                     </form>
                     <textarea readonly class="wow fadeInUp" type="textarea" name="outputText" id="output"
