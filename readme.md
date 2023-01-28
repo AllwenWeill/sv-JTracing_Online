@@ -7,10 +7,10 @@
 * 利用标准库容器封装char，实现自动增长的缓冲区；
 
 ## 效果展示
-样例SystemVerilog代码整体AST抽象语法树结构展示
+__样例SystemVerilog代码整体AST抽象语法树结构展示:__
 ![image](https://github.com/AllwenWeill/IMG/blob/main/AST_whole.png)
 
-其中for循环内AST抽象语法树完整展示
+__其中for循环内AST抽象语法树完整展示:__
 ![image](https://github.com/AllwenWeill/IMG/blob/main/AST_for.png)
 
 ## 环境要求
