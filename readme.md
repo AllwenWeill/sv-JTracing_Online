@@ -2,9 +2,10 @@
 利用C++实现针对SystemVerilog的高性能在线编译系统，可将SystemVerilog源代码进行高鲁棒性的词法解析和常见语法分析和部分语义分析，生成可靠Abstract Syntax Tree，并提供Parser解析过程信息、报错信息和变量表，该在线编译系统通过webbenchh压力测试可以实现近万的QPS
 
 ## 功能
+* 利用逐字符扫描SystemVerilog源代码进行高鲁棒性词法分析，稳定生成对应Token;
+* 利用递归下降法手工构建语法分析器，实现SystemVerilog常见语法检查，生成分析结果并输出可靠抽象语法树；
 * 利用IO复用技术Epoll与线程池实现多线程的Reactor高并发模型；
-* 利用正则与状态机解析HTTP请求报文，实现处理静态资源的请求
-* 利用标准库容器封装char，实现自动增长的缓冲区；
+* 利用状态机解析HTTP请求报文并转义url字符编码，实现分析与处理静态资源的请求；
 
 ## 效果展示
 __样例SystemVerilog代码整体AST抽象语法树结构展示:__
@@ -53,6 +54,11 @@ Requests: 11013 susceed, 0 failed.
 
 
 ## 致谢
+[@Ruslan Spivak](https://github.com/rspivak/): Let's Build A Simple Interpreter
+
 《Linux高性能服务器编程》，游双著.
 
 [@qinguoyi](https://github.com/qinguoyi/TinyWebServer)：TinyWebServer开源项目
+
+
+ 
