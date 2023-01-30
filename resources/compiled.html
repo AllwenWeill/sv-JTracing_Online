@@ -54,21 +54,21 @@
     <!-- HOME SECTION -->
     <section id="home">
         <div class="container">
-            <div style="float: left;">
+            <div class="compile_div" style="float: left;">
                 <h1 data-wow-delay="0.6s">输入</h1>
-                <form action="compile" method="post" style="float: left;">
+                <form id="compile_form" action="compile" method="post" style="float: left;">
                     <div>
                         <textarea type="textarea" id="input" name="inputText" 
                         placeholder="请输入SystemVerilog代码..."
                             required="required" ></textarea>
                     </div>
                     <div>
-                        <button type="submit">编译</button>
+                        <button id="compile_btn" type="submit">编译</button>
                     </div>
                     
                 </form>
             </div>
-            <div style="float: left;">
+            <div class="compile_div" style="float: left;">
                 <div>
                     <h1 data-wow-delay="0.6s">输出</h1>
                 </div>

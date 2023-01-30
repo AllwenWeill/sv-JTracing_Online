@@ -565,12 +565,17 @@ div#showCol {
   }
 
 }
+.compile_div {
+  width: 50%;
+}
+button#compile_btn {
+  width: 95%;
+}
+form#compile_form {
+  width: 100%;
+}
+textarea#input,textarea#output {
+  width: 95%;
+  height: 500px;
+}
 
-textarea#input {
-  width: 40%;
-  height: 500px;
-}
-textarea#output {
-  width: 40%;
-  height: 500px;
-}
