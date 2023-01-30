@@ -300,7 +300,7 @@ a:hover, a:active, a:focus {
    align-items: center;
   height: 100vh;
   position: relative;
-  padding-top: 30vh;
+  padding-top: 10vh;
 }
 
 #home img {
@@ -437,9 +437,9 @@ a:hover, a:active, a:focus {
 
 
 div#showCol {
-  padding-top: 90vh;
   width: 100%;
-	margin: 0 auto;
+  margin: auto;
+  padding-bottom: 10vh;
 }
 /*---------------------------------------
   Social icon             
@@ -565,15 +565,23 @@ div#showCol {
   }
 
 }
+
+.container {
+  margin-top: auto;
+}
+
 .compile_div {
   width: 50%;
 }
+
 button#compile_btn {
   width: 95%;
 }
+
 form#compile_form {
   width: 100%;
 }
+
 textarea#input,textarea#output {
   width: 95%;
   height: 500px;
