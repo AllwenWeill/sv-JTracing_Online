@@ -54,16 +54,28 @@
     <!-- HOME SECTION -->
     <section id="home">
         <div class="container">
-            <div class="row">
+            <div style="float: left;">
                 <h1 data-wow-delay="0.6s">输入</h1>
-                <form action="compile" method="post">
+                <form action="compile" method="post" style="float: left;">
                     <div>
-                        <textarea type="textarea" id="input" name="inputText" placeholder="请输入SystemVerilog代码..."
-                            required="required"></textarea>
+                        <textarea type="textarea" id="input" name="inputText" 
+                        placeholder="请输入SystemVerilog代码..."
+                            required="required" ></textarea>
                     </div>
-                    <button type="submit">编译</button>
+                    <div>
+                        <button type="submit">编译</button>
+                    </div>
+                    
                 </form>
-                <textarea readonly type="textarea" name="outputText" id="output" required="required"></textarea>
+            </div>
+            <div style="float: left;">
+                <div>
+                    <h1 data-wow-delay="0.6s">输出</h1>
+                </div>
+                <div>
+                    <textarea readonly type="textarea" name="outputText" 
+                    id="output" required="required" style="float: left;"></textarea>
+                </div>
             </div>
         </div>
     </section>
