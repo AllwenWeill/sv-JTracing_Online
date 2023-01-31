@@ -7,11 +7,15 @@
 * 利用IO复用技术Epoll与线程池实现多线程的Reactor高并发模型；
 * 利用状态机解析HTTP请求报文并转义url字符编码，实现分析与处理静态资源的请求；
 
-## 效果展示
-__样例SystemVerilog代码整体AST抽象语法树结构展示:__
+## Demo演示
+----------
+> * __在线编译系统整体演示__
+<div align=center><img src="https://github.com/AllwenWeill/IMG/blob/main/video_show.gif" height="429"/> </div>
+
+> *__样例SystemVerilog代码整体AST抽象语法树结构展示:__
 ![image](https://github.com/AllwenWeill/IMG/blob/main/AST_whole.png)
 
-__其中for循环内AST抽象语法树完整展示:__
+> *__其中for循环内AST抽象语法树完整展示:__
 ![image](https://github.com/AllwenWeill/IMG/blob/main/AST_for.png)
 
 ## 环境要求
@@ -60,5 +64,6 @@ Requests: 11013 susceed, 0 failed.
 
 [@qinguoyi](https://github.com/qinguoyi/TinyWebServer)：TinyWebServer开源项目
 
+[@MikePopoloski](https://github.com/MikePopoloski/slang)：slang开源项目
 
  
