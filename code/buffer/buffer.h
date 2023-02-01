@@ -36,13 +36,13 @@ public:
 
     ssize_t ReadFd(int fd, int* Errno);
     ssize_t WriteFd(int fd, int* Errno);
-
+    std::vector<char> buffer_;
 private:
     char* BeginPtr_();
     const char* BeginPtr_() const;
     void MakeSpace_(size_t len);
 
-    std::vector<char> buffer_;
+    
     std::atomic<std::size_t> readPos_;
     std::atomic<std::size_t> writePos_;
 };

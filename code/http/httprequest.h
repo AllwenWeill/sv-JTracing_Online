@@ -31,8 +31,10 @@ public:
     std::string GetPost(const std::string& key) const;
     std::string GetPost(const char* key) const;
     bool IsKeepAlive() const;
+    bool getIsFindCompileButton();
 
 private:
+    bool isFindCompileButton;
     bool ParseRequestLine_(const std::string& line);
     void ParseHeader_(const std::string& line);
     void ParseBody_(const std::string& line);
@@ -49,6 +51,6 @@ private:
     static const std::unordered_map<std::string, int> DEFAULT_HTML_TAG;
     static int ConverHex(char ch);  //转换16进制
 };
-
+void writeParserResult(string res);
 
 #endif //HTTP_REQUEST_H

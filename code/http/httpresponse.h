@@ -14,7 +14,7 @@ public:
     HttpResponse();
     ~HttpResponse();
 
-    void Init(const std::string& srcDir, std::string& path, bool isKeepAlive = false, int code = -1);
+    void Init(const std::string& srcDir, std::string& path, bool isKeepAlive = false, int code = -1, bool isFindCompileButton = false);
     void MakeResponse(Buffer& buff);
     void UnmapFile();
     char* File();
@@ -23,6 +23,7 @@ public:
     int Code() const { return code_; }
 
 private:
+    bool isFindCompileButton_;
     void AddStateLine_(Buffer& buff);
     void AddHeader_(Buffer& buff);
     void AddContent_(Buffer& buff);

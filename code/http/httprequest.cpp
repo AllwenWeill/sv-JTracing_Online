@@ -1,18 +1,20 @@
 #include "httprequest.h"
 using namespace std;
+namespace fs = std::filesystem;
 
 const unordered_set<string> HttpRequest::DEFAULT_HTML{
-            "/index", "/register", "/login",
+            "/index", "/helper", "/compile", "/show",
              "/welcome", "/video", "/picture", };
 
 const unordered_map<string, int> HttpRequest::DEFAULT_HTML_TAG {
-            {"/register.html", 0}, {"/login.html", 1},  };
+            {"/compile.html", 1},  };
 
 void HttpRequest::Init() {
     method_ = path_ = version_ = body_ = "";
     state_ = REQUEST_LINE;
     header_.clear();
     post_.clear();
+    isFindCompileButton = false;
 }
 
 bool HttpRequest::IsKeepAlive() const {
@@ -27,9 +29,13 @@ bool HttpRequest::parse(Buffer& buff) {
     if(buff.ReadableBytes() <= 0) {
         return false;
     }
+    // for(auto i : buff.buffer_){
+    //     cout<<i;
+    // }
     while(buff.ReadableBytes() && state_ != FINISH) {   
         const char* lineEnd = search(buff.Peek(), buff.BeginWriteConst(), CRLF, CRLF + 2);
         std::string line(buff.Peek(), lineEnd);
+        printf("L: %d, state %d\n",__LINE__,state_);
         switch(state_)  //此处各种错误/异常状态没有判断，鲁棒性不强，后期可以继续完善
         {
         case REQUEST_LINE:
@@ -108,14 +114,26 @@ int HttpRequest::ConverHex(char ch) {
 
 void HttpRequest::ParsePost_() {
     if(method_ == "POST" && header_["Content-Type"] == "application/x-www-form-urlencoded") {
-        std::string codeText = ParseFromUrlencoded_();
+        std::string codeText = ParseFromUrlencoded_() + "\n";
         if(DEFAULT_HTML_TAG.count(path_)) {
+            cout<<"path____"<<path_;
             int tag = DEFAULT_HTML_TAG.find(path_)->second;
-            if(tag == 0 || tag == 1) { //如果是注册或者登录页面
-                if(svParser(codeText))
-                    path_ = "/welcome.html";
-                else
-                    path_ = "/error.html";
+            if(tag == 1) { //如果是编译页面
+                if(post_.count("sendbtn")){
+                    cout<<"post_.count(sendbtn)";
+                    isFindCompileButton = true;
+                    //svParser(codeText);
+                }
+                if(post_.count("inputText")){
+                    cout<<"post_.count(inputText)";
+                    isFindCompileButton = true;
+                    //svParser(codeText);
+                    if(svParser(codeText))
+                         path_ = "/compiled.html"; //content-type:text/html
+                    else
+                        path_ = "/error.html";
+                }
+                
             }
         }
     }   
@@ -124,18 +142,31 @@ void HttpRequest::ParsePost_() {
 bool HttpRequest::svParser(const std::string& codeText){
     SourceManager SM(codeText);
     string *psm = &SM.fd.filememo;
-    cout<<*psm<<endl;
+    cout<<"codeText:"<<codeText<<endl;
     cout<<"------------"<<endl;
     cout << "SM.fd.filesize:" << SM.fd.filememo.size() << endl;
-    // Lexer lex(psm, SM.fd.filesize);
-    // cout<<endl;
-    // Parser par(lex.getTokenVector());
+    Lexer lex(psm, SM.fd.filesize);
+    cout<<endl;
+    Parser par(lex.getTokenVector());
+    string resParser = par.showParserInformation() + par.showErrorInformation() + par.showVariableInformation();
+    writeParserResult(resParser);
     return true;
+}
+
+void writeParserResult(string res){
+    fs::path filepath= "/home/allwen77/Desktop/workstation/sv-WebServer/resources/ret.txt";//resources/ret.txt code/http/httprequest.cpp
+    if (!fs::exists(filepath)) {
+        perror("Error: Invaild filepath.\n");
+        exit(-1); 
+    }
+    ofstream output{ filepath };
+    output << res << endl;
+    output.close();
 }
 
 string HttpRequest::ParseFromUrlencoded_() {
     if(body_.size() == 0) { return nullptr; }
-    cout<<body_<<endl;
+    // cout<<body_<<endl;
     std::string key, value;
     int num = 0;
     int n = body_.size();
@@ -206,4 +237,8 @@ std::string HttpRequest::GetPost(const char* key) const {
         return post_.find(key)->second;
     }
     return "";
+}
+
+bool HttpRequest::getIsFindCompileButton(){
+    return isFindCompileButton;
 }

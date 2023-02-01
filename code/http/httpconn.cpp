@@ -88,16 +88,22 @@ ssize_t HttpConn::write(int* saveErrno) {
 }
 
 bool HttpConn::process() {
+    printf("in httpconn:process\n");
+    cout<<"--------------"<<endl;
+    for(auto i : readBuff_.buffer_){
+        cout<<i;
+    }
+    cout<<"--------------"<<endl;
     request_.Init();
     if(readBuff_.ReadableBytes() <= 0) {
         return false;
     }
     else if(request_.parse(readBuff_)) {
-        response_.Init(srcDir, request_.path(), request_.IsKeepAlive(), 200);
+        response_.Init(srcDir, request_.path(), request_.IsKeepAlive(), 200, request_.getIsFindCompileButton());
     } else {
         response_.Init(srcDir, request_.path(), false, 400);
     }
-
+    
     response_.MakeResponse(writeBuff_);
     /* 响应头 */
     iov_[0].iov_base = const_cast<char*>(writeBuff_.Peek());

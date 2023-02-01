@@ -15,7 +15,6 @@ html, body {
 }
 
 
-
 /*---------------------------------------
   Typorgraphy              
 -----------------------------------------*/
@@ -299,9 +298,9 @@ a:hover, a:active, a:focus {
   -webkit-align-items: center;
   -ms-flex-align: center;
    align-items: center;
-  height: 100vh;
+   height: 60vh;
   position: relative;
-  padding-top: 62px;
+  padding-top: 10vh;
 }
 
 #home img {
@@ -437,7 +436,11 @@ a:hover, a:active, a:focus {
 }
 
 
-
+div#showCol {
+  width: 100%;
+  margin: auto;
+  padding-bottom: 10vh;
+}
 /*---------------------------------------
   Social icon             
 -----------------------------------------*/
@@ -480,7 +483,7 @@ a:hover, a:active, a:focus {
   Mobile Responsive styles              
 -----------------------------------------*/
 
-@media (min-width: 768px) and (max-width: 1024px) {
+/* @media (min-width: 768px) and (max-width: 1024px) {
   #home {
     height: 50vh;
   }
@@ -496,7 +499,7 @@ a:hover, a:active, a:focus {
   #home {
     height: 190vh;
   }
-}
+} */
 
 @media (max-width: 980px) {
 
@@ -562,3 +565,25 @@ a:hover, a:active, a:focus {
   }
 
 }
+
+.container {
+  margin-top: auto;
+}
+
+.compile_div {
+  width: 50%;
+}
+
+button#compile_btn {
+  width: 95%;
+}
+
+form#compile_form {
+  width: 100%;
+}
+
+textarea#input,textarea#output {
+  width: 95%;
+  height: 500px;
+}
+
