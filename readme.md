@@ -9,7 +9,7 @@
 
 ## Demo演示
 ----------
-> * __在线编译系统整体演示__
+> * __在线编译系统整体视频演示__
 <div align=center><img src="https://github.com/AllwenWeill/IMG/blob/main/video_show.gif" height="429"/> </div>
 
 > *__样例SystemVerilog代码整体AST抽象语法树结构展示:__
