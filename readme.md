@@ -12,7 +12,7 @@
 > * __在线编译系统整体视频演示__
 <div align=center><img src="https://github.com/AllwenWeill/IMG/blob/main/video_show.gif" height="429"/> </div>
 
-> * __样例1-medule__
+> * __样例1-module__
 ```bash
 module m;
     // hello
