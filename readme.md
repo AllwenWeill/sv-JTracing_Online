@@ -80,6 +80,8 @@ Requests: 11013 susceed, 0 failed.
 ## 致谢
 [@Ruslan Spivak](https://github.com/rspivak/): Let's Build A Simple Interpreter
 
+[@LLVM](https://llvm.org/docs/tutorial/MyFirstLanguageFrontend/index.html): My First Language Frontend with LLVM Tutorial
+
 《Linux高性能服务器编程》，游双著.
 
 [@qinguoyi](https://github.com/qinguoyi/TinyWebServer)：TinyWebServer开源项目
