@@ -1,4 +1,7 @@
 # sv-JTracing(Online)
+
+| **中文** | [English](readme_en.md) |
+
 利用C++实现针对SystemVerilog的高性能在线编译系统，可将SystemVerilog源代码进行高鲁棒性的词法解析和常见语法分析和部分语义分析，生成可靠Abstract Syntax Tree，并提供Parser解析过程信息、报错信息和变量表，该在线编译系统通过webbenchh压力测试可以实现近万的QPS
 
 ## 功能
