@@ -2,9 +2,10 @@
 
 | **中文** | [English](readme_en.md) |
 
-[![GitHubStars](https://img.shields.io/github/stars/AllwenWeill/sv-JTracing_Online?style=flat-square&logo=GitHub)](https://github.com/AllwenWeill/sv-JTracing_Online/stargazers)
+[![GitHubStars](https://img.shields.io/github/stars/AllwenWeill/sv-JTracing_Online?logo=GitHub)](https://github.com/AllwenWeill/sv-JTracing_Online/stargazers)
 [![GitHub pull-requests](https://img.shields.io/github/issues-pr/AllwenWeill/sv-JTracing_Online.svg)](https://github.com/AllwenWeill/sv-JTracing_Online/pulls)
 [![GitHub LICENSE](https://img.shields.io/github/license/AllwenWeill/sv-JTracing_Online.svg)](https://github.com/AllwenWeill/sv-JTracing_Online/blob/master/LICENSE)
+[![GitHub contributors](https://img.shields.io/github/contributors/AllwenWeill/sv-JTracing_Online.svg)](https://github.com/AllwenWeill/sv-JTracing_Online/graphs/contributors)
 
 利用C++实现针对SystemVerilog的高性能在线编译系统，可将SystemVerilog源代码进行高鲁棒性的词法解析和常见语法分析和部分语义分析，生成可靠Abstract Syntax Tree，并提供Parser解析过程信息、报错信息和变量表，该在线编译系统通过webbenchh压力测试可以实现近万的QPS
 

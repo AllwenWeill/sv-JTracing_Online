@@ -2,9 +2,10 @@
 
 | [中文](readme.md) | **English** |
 
-[![GitHubStars](https://img.shields.io/github/stars/AllwenWeill/sv-JTracing_Online?style=flat-square&logo=GitHub)](https://github.com/AllwenWeill/sv-JTracing_Online/stargazers)
+[![GitHubStars](https://img.shields.io/github/stars/AllwenWeill/sv-JTracing_Online?logo=GitHub)](https://github.com/AllwenWeill/sv-JTracing_Online/stargazers)
 [![GitHub pull-requests](https://img.shields.io/github/issues-pr/AllwenWeill/sv-JTracing_Online.svg)](https://github.com/AllwenWeill/sv-JTracing_Online/pulls)
 [![GitHub LICENSE](https://img.shields.io/github/license/AllwenWeill/sv-JTracing_Online.svg)](https://github.com/AllwenWeill/sv-JTracing_Online/blob/master/LICENSE)
+[![GitHub contributors](https://img.shields.io/github/contributors/AllwenWeill/sv-JTracing_Online.svg)](https://github.com/AllwenWeill/sv-JTracing_Online/graphs/contributors)
 
 Using C++ to implement a high performance online compiler system for SystemVerilog, the SystemVerilog source code can be highly robust lexical analysis, common Syntax analysis and partial semantic analysis, generating reliable Abstract Syntax Tree. It also provides Parser process information, error information and variable table. The online compilation system can achieve nearly ten thousand QPS through webbenchh stress test.
 
