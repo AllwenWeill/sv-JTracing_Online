@@ -76,7 +76,7 @@ make
 Webbench - Simple Web Benchmark 1.5
 Copyright (c) Radim Kolar 1997-2004, GPL Open Source Software.
 
-Benchmarking: GET http://192.168.48.128:1316/
+Benchmarking: GET http://192.168.48.128:4466/
 7000 clients, running 5 sec.
 
 Speed=132156 pages/min, 6923630 bytes/sec.
